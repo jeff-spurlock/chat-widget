@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* Additional styles to ensure proper shadow DOM styling */
 :host {
   all: initial;

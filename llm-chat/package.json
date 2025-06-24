@@ -4,21 +4,22 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "bun run index.ts",
-    "build": "webpack",
+    "dev": "npm run build && bun run index.ts",
+    "build": "npm run build:css && webpack",
+    "build:css": "bunx tailwindcss --input src/styles.css --output dist/styles.css",
     "build:watch": "webpack --watch"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.10",
     "@types/bun": "latest",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "autoprefixer": "^10.4.21",
+    "autoprefixer": "^10.4.0",
     "css-loader": "^7.1.2",
-    "postcss": "^8.5.6",
+    "mini-css-extract-plugin": "^2.9.2",
+    "postcss": "^8.4.0",
     "postcss-loader": "^8.1.1",
     "style-loader": "^4.0.0",
-    "tailwindcss": "^4.1.10",
+    "tailwindcss": "^3.4.0",
     "ts-loader": "^9.5.2",
     "webpack": "^5.99.9",
     "webpack-cli": "^6.0.1",
@@ -28,7 +29,12 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "class-names": "^1.0.0",
+    "class-variance-authority": "^0.7.1",
+    "lucide-react": "^0.523.0",
+    "radix-ui": "^1.4.2",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "tailwind-merge": "^3.3.1"
   }
 }

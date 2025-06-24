@@ -92,6 +92,29 @@ const server = serve({
       }
     }
     
+    if (url.pathname === "/styles.css") {
+      // Serve the compiled CSS file
+      try {
+        const cssPath = join(process.cwd(), "dist", "styles.css");
+        if (existsSync(cssPath)) {
+          const content = readFileSync(cssPath, "utf-8");
+          return new Response(content, {
+            headers: { "Content-Type": "text/css" },
+          });
+        } else {
+          return new Response("/* CSS not found. Please run 'bun run build' first. */", {
+            headers: { "Content-Type": "text/css" },
+            status: 404,
+          });
+        }
+      } catch (error) {
+        return new Response("/* Error loading CSS: " + error + " */", {
+          headers: { "Content-Type": "text/css" },
+          status: 500,
+        });
+      }
+    }
+    
     return new Response("Not Found", { status: 404 });
   },
 });

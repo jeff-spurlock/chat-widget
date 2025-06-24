@@ -11,9 +11,6 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
-    alias: {
-      '@': path.resolve(__dirname, 'src'),
-    },
   },
   module: {
     rules: [
@@ -24,10 +21,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        type: 'asset/resource',
-        generator: {
-          emit: false,
-        },
+        use: [
+          'style-loader',
+          'css-loader',
+          'postcss-loader',
+        ],
       },
     ],
   },
@@ -36,7 +34,6 @@ module.exports = {
     // react: 'React',
     // 'react-dom': 'ReactDOM',
   },
-  plugins: [],
   optimization: {
     usedExports: true,
     sideEffects: false,
