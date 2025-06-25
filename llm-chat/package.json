@@ -29,6 +29,8 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^1.2.12",
+    "ai": "^4.1.12",
     "class-names": "^1.0.0",
     "class-variance-authority": "^0.7.1",
     "lucide-react": "^0.523.0",

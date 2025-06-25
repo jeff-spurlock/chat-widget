@@ -1,7 +1,7 @@
 import { serve } from "bun";
 import { readFileSync, existsSync } from "fs";
 import { join } from "path";
-
+import { generateResponse } from "./src/llm/model";
 
 // Demo HTML content
 const demoHTML = `
@@ -112,6 +112,23 @@ const server = serve({
           headers: { "Content-Type": "text/css" },
           status: 500,
         });
+      }
+    }
+
+    if (url.pathname === "/api/generate") {
+      const { input } = await req.json();
+      if (!input) {
+        console.error("No input provided");
+        return new Response(JSON.stringify({ error: "No input provided" }), { status: 400 });
+      }
+
+      try {
+        const response = await generateResponse({ input });
+        console.log("response", response);
+        return new Response(response, { status: 200 });
+      } catch (error) {
+        console.error(error)
+        return new Response(JSON.stringify({ error: "Error generating response", details: error }), { status: 500 });
       }
     }
     
